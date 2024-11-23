@@ -11,13 +11,13 @@
   <p><strong>{challenge.description}</strong></p>
   <p>Participants: {challenge.participants.join(", ")}</p>
   <p>Status: <span style="color: {challenge.completed ? 'green' : 'inherit'}">{challenge.completed ? "Completed" : "Incomplete"}</span></p>
-  <p>Progress: {challenge.progress} / {challenge.target}</p>
   
-  {#if challenge.target === 1}
+  {#if challenge.target === 1 && !challenge.completed}
     <button on:click={() => toggleCompletion(index)}>
       {challenge.completed ? "Completed" : "Complete"}
     </button>
-  {:else}
+  {:else if !challenge.completed}
+    <p>Progress: {challenge.progress} / {challenge.target}</p>
     <input
       type="number"
       bind:value={progressAmount}
