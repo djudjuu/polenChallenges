@@ -1,6 +1,17 @@
 <script>
   // Reactive variables for challenges and form inputs
-  let challenges = [];
+  let challenges = [
+    {
+      description: "Eisbaden",
+      participants: ["Antonk", "Conrad"],
+      completed: false
+    },
+    {
+      description: "300 bahnen pro tag",
+      participants: ["alle"],
+      completed: false
+    },
+	];
   let description = "";
   let participants = "";
 
