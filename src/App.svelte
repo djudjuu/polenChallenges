@@ -2,7 +2,7 @@
 // Reactive variables for challenges and form inputs
   let challenges = [
     {
-      description: "Eisbaden"
+      description: "Eisbaden",
       participants: ["Alice", "Bob"],
       completed: false
     },
