@@ -7,7 +7,7 @@
   let progressAmount = 1;
 </script>
 
-<li>
+<li class:completed={challenge.completed}>
   <p><strong>{challenge.description}</strong></p>
   <p>Participants: {challenge.participants.join(", ")}</p>
   <p>Status: <span style="color: {challenge.completed ? 'green' : 'inherit'}">{challenge.completed ? "Completed" : "Incomplete"}</span></p>
@@ -29,3 +29,17 @@
   
   <button on:click={() => deleteChallenge(index)}>Delete</button>
 </li>
+
+<style>
+  li {
+    border: 2px solid #4b4b8f; /* Default border color */
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    background-color: #4b4b8f; /* Vaporwave medium purple */
+  }
+
+  li.completed {
+    border-color: #39ff14; /* Neon green border color when completed */
+  }
+</style>
