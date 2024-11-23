@@ -1,21 +1,34 @@
 <script>
-// Reactive variables for challenges and form inputs
+  import AddChallengeForm from './components/AddChallengeForm.svelte';
+  import ChallengeList from './components/ChallengeList.svelte';
+
   let challenges = [
     {
-      description: "Eisbaden",
+      description: "Go hiking",
       participants: ["Alice", "Bob"],
-      completed: false
+      completed: false,
+      target: 1,
+      progress: 0
     },
     {
       description: "Read a book",
       participants: ["Charlie"],
-      completed: false
+      completed: false,
+      target: 1,
+      progress: 0
     },
+    {
+      description: "Swim 300 laps",
+      participants: ["Alice", "Charlie"],
+      completed: false,
+      target: 300,
+      progress: 0
+    }
   ];
   let description = "";
   let participants = "";
+  let target = 1;
 
-  // Add a new challenge
   function addChallenge() {
     if (description.trim()) {
       challenges = [
@@ -23,58 +36,49 @@
         {
           description,
           participants: participants.split(",").map(p => p.trim()),
-          completed: false
+          completed: false,
+          target,
+          progress: 0
         }
       ];
       description = "";
       participants = "";
+      target = 1;
     }
   }
 
-  // Toggle challenge completion
   function toggleCompletion(index) {
     challenges[index].completed = !challenges[index].completed;
   }
 
-  // Add a function to remove a challenge
+  function incrementProgress(index, amount) {
+    if (!challenges[index].completed) {
+      challenges[index].progress += amount || 1;
+      if (challenges[index].progress >= challenges[index].target) {
+        challenges[index].completed = true;
+      }
+    }
+  }
+
   function deleteChallenge(index) {
     challenges = challenges.filter((_, i) => i !== index);
   }
 </script>
 
 <main>
-  <h1 class="flashy-heading">
-    Vacation Challenge List
-  </h1>
-  <!-- Add Challenge Form -->
-  <div>
-    <input
-      type="text"
-      bind:value={description}
-      placeholder="Challenge description"
-    />
-    <input
-      type="text"
-      bind:value={participants}
-      placeholder="Participants (comma-separated)"
-    />
-    <button on:click={addChallenge}>Add Challenge</button>
-  </div>
-
-  <!-- Display Challenges -->
-  <ul>
-    {#each challenges as challenge, index}
-      <li>
-        <p><strong>{challenge.description}</strong></p>
-        <p>Participants: {challenge.participants.join(", ")}</p>
-        <p>Status: {challenge.completed ? "Completed" : "Incomplete"}</p>
-        <button on:click={() => toggleCompletion(index)}>
-          {challenge.completed ? "Undo" : "Complete"}
-        </button>
-        <button on:click={() => deleteChallenge(index)}>Delete</button>
-      </li>
-    {/each}
-  </ul>
+  <h1 class="flashy-heading">Vacation Challenge List</h1>
+  <AddChallengeForm
+    bind:description={description}
+    bind:participants={participants}
+    bind:target={target}
+    {addChallenge}
+  />
+  <ChallengeList
+    {challenges}
+    {toggleCompletion}
+    {incrementProgress}
+    {deleteChallenge}
+  />
 </main>
 
 <style>
