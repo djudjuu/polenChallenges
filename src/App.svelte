@@ -1,17 +1,17 @@
 <script>
-  // Reactive variables for challenges and form inputs
+// Reactive variables for challenges and form inputs
   let challenges = [
     {
-      description: "Eisbaden",
-      participants: ["Antonk", "Conrad"],
+      description: "Eisbaden"
+      participants: ["Alice", "Bob"],
       completed: false
     },
     {
-      description: "300 bahnen pro tag",
-      participants: ["alle"],
+      description: "Read a book",
+      participants: ["Charlie"],
       completed: false
     },
-	];
+  ];
   let description = "";
   let participants = "";
 
@@ -36,15 +36,16 @@
     challenges[index].completed = !challenges[index].completed;
   }
 
-  // add a function to remove a challenge
+  // Add a function to remove a challenge
   function deleteChallenge(index) {
-	challenges = challenges.filter((_, i) => i !== index);
+    challenges = challenges.filter((_, i) => i !== index);
   }
 </script>
 
 <main>
-  <h1>Vacation Challenge List</h1>
-
+  <h1 class="flashy-heading">
+    Vacation Challenge List
+  </h1>
   <!-- Add Challenge Form -->
   <div>
     <input
@@ -77,33 +78,65 @@
 </main>
 
 <style>
-  main {
-    font-family: Arial, sans-serif;
-    padding: 1rem;
-    max-width: 600px;
-    margin: auto;
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
   }
 
-  input {
-    margin: 0.5rem;
-    padding: 0.5rem;
-    font-size: 1rem;
+  .flashy-heading {
+    color: #ff77ff; /* Vaporwave pink */
+    text-shadow: 2px 2px 4px #00ffff; /* Vaporwave cyan */
+    font-size: 3em;
+    text-align: center;
+    margin-top: 20px;
+    animation: blink 1s infinite;
+  }
+
+  main {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background-color: #2e2b5f; /* Vaporwave dark purple */
+    color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+
+  input, button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 1em;
   }
 
   button {
-    margin: 0.5rem;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    background-color: #ff77ff; /* Vaporwave pink */
+    color: #2e2b5f; /* Vaporwave dark purple */
+    cursor: pointer;
+  }
+
+  button:hover {
+    background-color: #00ffff; /* Vaporwave cyan */
+    color: #2e2b5f; /* Vaporwave dark purple */
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
   }
 
   li {
-    margin: 1rem 0;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background-color: #4b4b8f; /* Vaporwave medium purple */
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
   }
 
   li p {
-    margin: 0.5rem 0;
+    margin: 5px 0;
   }
 </style>
